@@ -216,9 +216,10 @@ module.exports = (entry, alias = {}, useSplitChunk = false) => {
         [`@openbit/${p}`]: path.resolve(__dirname, `../${p}/src`)
       }), {
         ...alias,
-        'react/jsx-runtime': require.resolve('react/jsx-runtime')
+        'react/jsx-runtime': require.resolve('react/jsx-runtime'),
+        '@gobob/bob-sdk/dist/ordinal-api': require.resolve('@gobob/bob-sdk/dist/ordinal-api'),
       }),
-      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.mjs'],
       fallback: {
         crypto: require.resolve('crypto-browserify'),
         path: require.resolve('path-browserify'),

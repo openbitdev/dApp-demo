@@ -1,7 +1,7 @@
 {
   "author": "Koni Studio",
-  "bugs": "https://github.com/openbitdev/dApp-demo/issues",
-  "homepage": "https://github.com/openbitdev/dApp-demo",
+  "bugs": "https://github.com/Koniverse/SubConnect/issues",
+  "homepage": "https://github.com/Koniverse/SubConnect/tree/master/packages/dapp-demo#readme",
   "license": "Apache-2.0",
   "name": "@openbit/dapp-demo",
   "private": true,
@@ -16,6 +16,8 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@ethersproject/keccak256": "^5.6.1",
+    "@gobob/sats-wagmi": "^0.0.3",
+    "@openbit/wallet-connect": "0.2.6-beta.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",

@@ -4,6 +4,7 @@
   },
   "files": [],
   "references": [
-    { "path": "./packages/dapp-demo/tsconfig.build.json" }
+    { "path": "./packages/dapp-demo/tsconfig.build.json" },
+    { "path": "./packages/wallet-connect/tsconfig.build.json" }
   ]
 }

@@ -67,10 +67,17 @@ export function createBundle ({ entries = {}, external, globals = {}, index, inj
   };
 }
 
+const pkgs = [
+  '@openbit/wallet-connect',
+]
 
 
 
-const external= [];
+const external= [
+  ...pkgs,
+  '@polkadot/networks',
+  '@polkadot/util'
+];
 
 const entries = [].reduce((all, p) => ({
   ...all,

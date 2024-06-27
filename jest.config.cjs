@@ -33,7 +33,7 @@ module.exports = {
     ...config.modulePathIgnorePatterns
   ],
   moduleNameMapper: {
-    '@openbit/(dapp-demo)/(.*)$': '<rootDir>/packages/$1/src/$2',
+    '@openbit/(dapp-demo|wallet-connect)/(.*)$': '<rootDir>/packages/$1/src/$2',
   },
   transform: {
     ...config.transform,
