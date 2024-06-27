@@ -1,0 +1,47 @@
+{
+  "author": "Koni Studio",
+  "bugs": "https://github.com/Koniverse/SubConnect/issues",
+  "homepage": "https://github.com/Koniverse/SubConnect#readme",
+  "license": "Apache-2.0",
+  "packageManager": "yarn@3.2.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Koniverse/SubConnect.git"
+  },
+  "sideEffects": false,
+  "version": "0.2.6-beta.1",
+  "workspaces": [
+    "packages/*"
+  ],
+  "bin": {
+    "koni-ci-build-dev": "./scripts/koni-ci-build-dev.mjs",
+    "koni-ci-ghact-build": "./scripts/koni-ci-ghact-build.mjs",
+    "koni-dev-build-ts": "./scripts/koni-dev-build-ts.mjs"
+  },
+  "scripts": {
+    "build": "koni-dev-build-ts",
+    "build:ui": "yarn clean && cd packages/dapp-demo && yarn polkadot-exec-webpack --config webpack.config.cjs --mode production",
+    "clean": "polkadot-dev-clean-build",
+    "deploy:ui": "yarn build:ui && gh-pages --dist 'packages/dapp-demo/build' --branch 'gh-pages'",
+    "lint": "polkadot-dev-run-lint",
+    "start": "yarn watch",
+    "test": "polkadot-dev-run-test --detectOpenHandles'",
+    "watch": "cd packages/dapp-demo && yarn webpack-dev-server --config webpack.watch.cjs --mode development"
+  },
+  "devDependencies": {
+    "@polkadot/dev": "^0.66.28",
+    "gh-pages": "^4.0.0",
+    "jest-environment-jsdom": "^28.1.0",
+    "jest-svg-transformer": "^1.0.0",
+    "jest-transform-stub": "^2.0.0"
+  },
+  "resolutions": {
+    "@babel/runtime": "^7.16.7",
+    "@polkadot/api": "^10.9.1",
+    "@polkadot/types": "^10.9.1",
+    "@polkadot/util": "^10.1.2",
+    "@types/node": "^16.7.13",
+    "typescript": "^4.6.4"
+  }
+}
