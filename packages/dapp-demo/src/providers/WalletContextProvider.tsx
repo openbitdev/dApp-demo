@@ -19,15 +19,20 @@ export function WalletContextProvider ({ children }: Props) {
   const [walletType, setWalletType] = useLocalStorage('wallet-type', 'substrate');
   const [currentWallet, setCurrentWallet] = useState<EvmWallet | undefined | SatsConnector>(getEvmWalletBySource(walletKey));
   const [isSelectWallet, setIsSelectWallet] = useState(false);
-  const [accounts] = useState<WalletAccount[]>([]);
+  const [accounts, setAccounts] = useState<WalletAccount[]>([]);
   const { connectors } = useConnect();
 
   // getAccount
   const afterSelectWallet = useCallback(
     (wallet: SatsConnector) => {
-      const infos = wallet.getAccount();
+      const address = wallet.getAccount();
 
-      console.log(infos);
+      if (address) {
+        setAccounts([{
+          address,
+          source: wallet.id
+        }]);
+      }
     },
     []
   );
@@ -38,9 +43,18 @@ export function WalletContextProvider ({ children }: Props) {
 
   const selectWallet = useCallback(
     async (wallet: SatsConnector) => {
+      if (!wallet.isAuthorized()) {
+        try {
+          await wallet.connect();
+        } catch (e) {
+          console.log('Error when connect()', e);
+
+          return;
+        }
+      }
+
       setCurrentWallet(currentWallet);
 
-      await wallet.connect();
       setWalletKey(wallet.name);
 
       afterSelectWallet(wallet);
@@ -101,9 +115,9 @@ export function WalletContextProvider ({ children }: Props) {
         const wallet = connectors.find(({ name }) => name === walletKey);
 
         setTimeout(() => {
-          if (wallet && wallet?.ready) {
+          wallet && wallet?.isReady().then(() => {
             afterSelectWallet(wallet);
-          }
+          }).catch(console.log);
         }, 150);
       } else {
         const evmWallet = getEvmWalletBySource(walletKey);

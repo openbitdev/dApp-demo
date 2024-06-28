@@ -35,7 +35,9 @@ function SelectWallet ({ onSelectWallet }: Props): React.ReactElement<Props> {
   const onClickBitcoinWallet = useCallback(
     (wallet: SatsConnector) => {
       return () => {
-        onSelectWallet(wallet.name, 'bitcoin');
+        if (wallet.ready) {
+          onSelectWallet(wallet.name, 'bitcoin');
+        }
       };
     },
     [onSelectWallet]
