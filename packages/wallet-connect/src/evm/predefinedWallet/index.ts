@@ -2,13 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { EvmWalletInfo } from '../../types';
-
 // @ts-ignore
 import MetaMaskLogo from './MetaMaskLogo.svg';
 // @ts-ignore
-import SubWalletLogo from './SubWalletLogo.svg';
-// @ts-ignore
 import NovaWalletLogo from './NovaWalletLogo.svg';
+// @ts-ignore
+import SubWalletLogo from './SubWalletLogo.svg';
 
 export const PREDEFINED_EVM_WALLETS: EvmWalletInfo[] = [
   {

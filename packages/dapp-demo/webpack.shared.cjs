@@ -21,7 +21,8 @@ if (args) {
 console.log('You are using ' + mode + ' mode.');
 
 const packages = [
-  'dapp-demo'
+  'dapp-demo',
+  'wallet-connect'
 ];
 
 const cssRegex = /\.css$/;

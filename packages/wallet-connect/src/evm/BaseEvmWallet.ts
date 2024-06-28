@@ -4,6 +4,7 @@
 import { MetaMaskInpageProvider } from '@metamask/providers';
 import { RequestArguments } from '@metamask/providers/dist/BaseProvider';
 import { Maybe } from '@metamask/types';
+
 import { EvmWallet, EvmWalletInfo, WalletLogoProps } from '../types';
 
 export class BaseEvmWallet implements EvmWallet {

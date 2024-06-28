@@ -1,15 +1,15 @@
 // Copyright 2019-2022 @subwallet/sub-connect authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import { EvmWallet, WalletAccount } from "@openbit/wallet-connect/types";
+import { SatsConnector } from '@gobob/sats-wagmi';
+import { EvmWallet, WalletAccount } from '@openbit/wallet-connect/types';
 import React from 'react';
-import {SatsConnector} from "@gobob/sats-wagmi";
 
 export interface WalletContextInterface {
   evmWallet?: EvmWallet,
   wallet?: SatsConnector,
   accounts: WalletAccount[],
-  setWallet: (wallet:  EvmWallet | undefined | SatsConnector, walletType: 'bitcoin'|'evm') => void
+  setWallet: (wallet: EvmWallet | undefined | SatsConnector, walletType: 'bitcoin'|'evm') => void
   walletType: 'bitcoin'|'evm';
 }
 

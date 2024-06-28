@@ -3,15 +3,14 @@
 
 import './SelectWallet.scss';
 
-import { getEvmWalletBySource } from "@openbit/wallet-connect/build/evm/evmWallets";
+import { useConnect } from '@gobob/sats-wagmi';
+import { getEvmWalletBySource } from '@openbit/wallet-connect/evm/evmWallets';
 import { Modal } from 'antd';
 import React, { useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { OpenSelectWallet, WalletContext } from '../contexts';
 import SelectWallet from './SelectWallet';
-import {useConnect} from "@gobob/sats-wagmi";
-
 
 interface Props {
   theme: string;
@@ -25,7 +24,7 @@ function SelectWalletModal ({ theme }: Props): React.ReactElement<Props> {
   const onSelectWallet = useCallback(
     (walletKey, walletType: 'bitcoin' | 'evm' = 'bitcoin') => {
       if (walletType === 'bitcoin') {
-        walletContext.setWallet(connectors.find(({name}) => name === walletKey), walletType);
+        walletContext.setWallet(connectors.find(({ name }) => name === walletKey), walletType);
         openSelectWalletContext.close();
         navigate('/wallet-info');
       } else {

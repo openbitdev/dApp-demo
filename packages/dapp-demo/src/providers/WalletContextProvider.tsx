@@ -1,13 +1,12 @@
 // Copyright 2019-2022 @subwallet/wallet-connect authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
+import { SatsConnector, useConnect } from '@gobob/sats-wagmi';
 import { useLocalStorage } from '@openbit/dapp-demo/hooks/useLocalStorage';
 import { windowReload } from '@openbit/dapp-demo/utils/window';
-import { getEvmWalletBySource } from "@openbit/wallet-connect/build/evm/evmWallets";
-import { EvmWallet, WalletAccount} from "@openbit/wallet-connect/types";
-import { SatsConnector, useConnect } from "@gobob/sats-wagmi";
+import { getEvmWalletBySource } from '@openbit/wallet-connect/evm/evmWallets';
+import { EvmWallet, WalletAccount } from '@openbit/wallet-connect/types';
 import React, { useCallback, useEffect, useState } from 'react';
-
 
 import { OpenSelectWallet, WalletContext, WalletContextInterface } from '../contexts';
 
@@ -16,15 +15,14 @@ interface Props {
 }
 
 export function WalletContextProvider ({ children }: Props) {
-
   const [walletKey, setWalletKey] = useLocalStorage('wallet-key');
   const [walletType, setWalletType] = useLocalStorage('wallet-type', 'substrate');
   const [currentWallet, setCurrentWallet] = useState<EvmWallet | undefined | SatsConnector>(getEvmWalletBySource(walletKey));
   const [isSelectWallet, setIsSelectWallet] = useState(false);
   const [accounts] = useState<WalletAccount[]>([]);
-  const {connectors} = useConnect();
+  const { connectors } = useConnect();
 
-  //getAccount
+  // getAccount
   const afterSelectWallet = useCallback(
     async (wallet: SatsConnector) => {
       const infos = wallet.getAccount();
@@ -34,9 +32,9 @@ export function WalletContextProvider ({ children }: Props) {
     []
   );
 
-  const getConnectBitcoin = ( connector: string) => {
-    return connectors.find(({name}) => name === walletKey);
-  }
+  const getConnectBitcoin = (connector: string) => {
+    return connectors.find(({ name }) => name === walletKey);
+  };
 
   const selectWallet = useCallback(
     async (wallet: SatsConnector) => {
@@ -100,11 +98,11 @@ export function WalletContextProvider ({ children }: Props) {
   useEffect(
     () => {
       if (walletType === 'bitcoin') {
-        const wallet = connectors.find(({name}) => name === walletKey);
+        const wallet = connectors.find(({ name }) => name === walletKey);
 
         setTimeout(() => {
           if (wallet && wallet?.ready) {
-           afterSelectWallet(wallet);
+            afterSelectWallet(wallet);
           }
         }, 150);
       } else {

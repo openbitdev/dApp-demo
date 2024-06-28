@@ -16,7 +16,7 @@ export function useLocalStorage (
     if (item) {
       try {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        setStoredValue(JSON.parse(item as string));
+        setStoredValue(JSON.parse(item));
       } catch (e) {
         setStoredValue(initialValue);
       }

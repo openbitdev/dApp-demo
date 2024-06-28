@@ -1,10 +1,11 @@
 // Copyright 2019-2022 @subwallet/sub-connect authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import { EvmWallet } from "@openbit/wallet-connect/build/types";
-import { getEvmWallets} from "@openbit/wallet-connect/build/evm/evmWallets";
+import { SatsConnector, useConnect } from '@gobob/sats-wagmi';
+import { getEvmWallets } from '@openbit/wallet-connect/evm/evmWallets';
+import { EvmWallet } from '@openbit/wallet-connect/types';
 import React, { useCallback } from 'react';
-import { useConnect, SatsConnector } from '@gobob/sats-wagmi';
+
 require('./SelectWallet.scss');
 
 interface Props {
@@ -18,16 +19,14 @@ function SelectWallet ({ onSelectWallet }: Props): React.ReactElement<Props> {
   const onClickBitcoinWallet = useCallback(
     (wallet: SatsConnector) => {
       return () => {
-
-          onSelectWallet(wallet.name, 'bitcoin');
-
+        onSelectWallet(wallet.name, 'bitcoin');
       };
     },
     [onSelectWallet]
   );
 
   const onClickEvmWallet = useCallback(
-    (wallet:  EvmWallet) => {
+    (wallet: EvmWallet) => {
       return () => {
         if (wallet.installed) {
           onSelectWallet(wallet.extensionName, 'evm');
@@ -79,17 +78,17 @@ function SelectWallet ({ onSelectWallet }: Props): React.ReactElement<Props> {
       <div className={'wallet-title'}>
         {wallet.name}
       </div>
-      {/*<div className={'wallet-install'}>*/}
-      {/*  {wallet.isReady()*/}
-      {/*    ? ''*/}
-      {/*    : (<a*/}
-      {/*      href={wallet.installUrl}*/}
-      {/*      rel='noreferrer'*/}
-      {/*      target='_blank'*/}
-      {/*    >*/}
-      {/*      Install*/}
-      {/*    </a>)}*/}
-      {/*</div>*/}
+      {/* <div className={'wallet-install'}> */}
+      {/*  {wallet.isReady() */}
+      {/*    ? '' */}
+      {/*    : (<a */}
+      {/*      href={wallet.installUrl} */}
+      {/*      rel='noreferrer' */}
+      {/*      target='_blank' */}
+      {/*    > */}
+      {/*      Install */}
+      {/*    </a>)} */}
+      {/* </div> */}
     </div>
   );
 

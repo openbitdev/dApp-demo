@@ -3,9 +3,9 @@
 
 // Some code of this file refer to https://github.com/MetaMask/test-dapp/blob/main/src/index.js
 import { keccak256 } from '@ethersproject/keccak256';
-import { RequestArguments } from "@metamask/providers/dist/BaseProvider";
+import { RequestArguments } from '@metamask/providers/dist/BaseProvider';
 import { Maybe } from '@metamask/types';
-import { METHOD_MAP } from "@openbit/dapp-demo/pages/methods";
+import { METHOD_MAP } from '@openbit/dapp-demo/pages/methods';
 import { windowReload } from '@openbit/dapp-demo/utils/window';
 import { Button, Input, message, Select } from 'antd';
 // eslint-disable-next-line camelcase
