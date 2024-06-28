@@ -24,7 +24,7 @@ export function WalletContextProvider ({ children }: Props) {
 
   // getAccount
   const afterSelectWallet = useCallback(
-    async (wallet: SatsConnector) => {
+    (wallet: SatsConnector) => {
       const infos = wallet.getAccount();
 
       console.log(infos);
@@ -43,7 +43,7 @@ export function WalletContextProvider ({ children }: Props) {
       await wallet.connect();
       setWalletKey(wallet.name);
 
-      await afterSelectWallet(wallet);
+      afterSelectWallet(wallet);
     },
     [afterSelectWallet, currentWallet, setWalletKey]
   );
@@ -113,7 +113,7 @@ export function WalletContextProvider ({ children }: Props) {
         });
       }
     },
-    [afterSelectEvmWallet, walletKey, walletType]
+    [afterSelectEvmWallet, afterSelectWallet, connectors, walletKey, walletType]
   );
 
   return (

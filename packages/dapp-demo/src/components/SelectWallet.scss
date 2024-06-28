@@ -44,10 +44,6 @@
     font-size: 18px;
     margin-bottom: 16px;
   }
-
-  .dotsama-wallet-list {
-    margin-bottom: 36px;
-  }
 }
 
 .select-wallet-content {
@@ -102,4 +98,8 @@
   &:hover {
     background-color: #151A30;
   }
+}
+
+.hidden {
+  display: none !important;
 }

@@ -459,66 +459,96 @@ function EvmWalletInfo (): React.ReactElement {
     <div className={'evm-wallet-info-page'}>
       <div className='evm-wallet-info-page__section'>
         <div className='evm-wallet-info-page__text'>Basic Information</div>
+
         <div>Network: {network && <span className='account-item__content'>{network?.name} ({chainId})</span>}</div>
+
         <div>Status: <span className='account-item__content'>{(wallet?.extension?.isConnected() && chainId) ? 'Connected' : 'Disconnected'}</span></div>
+
         <div>Current Address: <span className='account-item__content font-mono'>{accounts.join(', ')}</span></div>
+
         <div>Balance: <span className='account-item__content'>{balance} {network?.nativeCurrency.symbol}</span></div>
       </div>
+
       <div className='evm-wallet-info-page__section'>
         <div className='evm-wallet-info-page__text'>Permissions</div>
+
         <div className='evm-wallet-info__button_group'>
           {generateRequestButton('Get Permissions', METHOD_MAP.getPermissions, handlePermissionsRs)}
+
           {generateRequestButton('Request Permissions', METHOD_MAP.requestPermissions, handlePermissionsRs)}
         </div>
+
         {availableAccounts.length > 0 && (
           <div>
             <div>Available Accounts:</div>
+
             <div><span className='account-item__content font-mono'>{availableAccounts.join('\n')}</span></div>
           </div>
         )}
       </div>
+
       <div className='evm-wallet-info-page__section'>
         <div className='evm-wallet-info-page__text'>Network Actions</div>
+
         {warningNetwork && <div className='warning-text'>{warningNetwork}</div>}
+
         <div className='evm-wallet-info__button_group'>
           <div className='evm-wallet-info__button_row'>
             {generateRequestButton('Add Moonbeam Network', METHOD_MAP.addMoonbeamNetwork, undefined, chainId === 1284)}
+
             {generateRequestButton('Switch to Moonbeam', METHOD_MAP.switchToMoonbeamNetwork, undefined, chainId === 1284)}
           </div>
+
           <div className='evm-wallet-info__button_row'>
             {generateRequestButton('Add Moonriver Network', METHOD_MAP.addMoonriverNetwork, undefined, chainId === 1285)}
+
             {generateRequestButton('Switch to Moonriver', METHOD_MAP.switchToMoonriverNetwork, undefined, chainId === 1285)}
           </div>
+
           <div className='evm-wallet-info__button_row'>
             {generateRequestButton('Add Moonbase Network', METHOD_MAP.addMoonbaseAlphaNetwork, undefined, chainId === 1287)}
+
             {generateRequestButton('Switch to Moonbase', METHOD_MAP.switchToMoonbaseAlphaNetwork, undefined, chainId === 1287)}
           </div>
+
           <div className='evm-wallet-info__button_row'>
             {generateRequestButton('Add Astar Network', METHOD_MAP.addAstarNetwork, undefined, chainId === 592)}
+
             {generateRequestButton('Switch to Astar', METHOD_MAP.switchToAstarNetwork, undefined, chainId === 592)}
           </div>
+
           <div className='evm-wallet-info__button_row'>
             {generateRequestButton('Add Shiden Network', METHOD_MAP.addShidenNetwork, undefined, chainId === 336)}
+
             {generateRequestButton('Switch to Shiden', METHOD_MAP.switchToShidenNetwork, undefined, chainId === 336)}
           </div>
+
           <div className='evm-wallet-info__button_row'>
             {generateRequestButton('Add Shibuya Network', METHOD_MAP.addShibuyaNetwork, undefined, chainId === 81)}
+
             {generateRequestButton('Switch to Shibuya', METHOD_MAP.switchToShibuyaNetwork, undefined, chainId === 81)}
           </div>
+
           <div className='evm-wallet-info__button_row'>
             {generateRequestButton('Add Mumbai Network', METHOD_MAP.addMumbaiNetwork, undefined, chainId === 80001)}
+
             {generateRequestButton('Switch to Mumbai', METHOD_MAP.switchToMumbaiNetwork, undefined, chainId === 80001)}
           </div>
+
           <div className='evm-wallet-info__button_row'>
             {generateRequestButton('Add Boba Testnet', METHOD_MAP.addBobaTestnet, undefined, chainId === 1297)}
+
             {generateRequestButton('Switch to Boba Testnet', METHOD_MAP.switchToBobaTestnet, undefined, chainId === 1297)}
           </div>
         </div>
       </div>
+
       <div className='evm-wallet-info-page__section'>
         <div className='evm-wallet-info-page__text'>Transactions</div>
+
         <div className='evm-wallet-transaction_row'>
           <span className='label'>From Address</span>
+
           <Input
             className='code'
             readOnly
@@ -526,16 +556,20 @@ function EvmWalletInfo (): React.ReactElement {
             value={accounts[0]}
           />
         </div>
+
         <div className='evm-wallet-transaction_row'>
           <span className='label'>To Address</span>
+
           <Input
             className='code'
             onChange={_onChangeTransactionToAddress}
             type='text'
           />
         </div>
+
         <div className='evm-wallet-transaction_row'>
           <span className='label'>Amount</span>
+
           <div className='input-wrapper'>
             <Input
               className='code'
@@ -543,9 +577,11 @@ function EvmWalletInfo (): React.ReactElement {
               onChange={_onChangeTransactionAmount}
               type='number'
             />
+
             <span className='suffix'>{network?.nativeCurrency.symbol}</span>
           </div>
         </div>
+
         <div>
           <Button
             className='sub-wallet-btn sub-wallet-btn-small-size transaction-button'
@@ -553,6 +589,7 @@ function EvmWalletInfo (): React.ReactElement {
           >
             Send transaction
           </Button>
+
           {transactionLink && <div>
             Check transaction on block explorer by click
             <a
@@ -563,10 +600,13 @@ function EvmWalletInfo (): React.ReactElement {
           </div>}
         </div>
       </div>
+
       <div className='evm-wallet-info-page__section'>
         <div className='evm-wallet-info-page__text'>Signature</div>
+
         <div className='evm-wallet-transaction_row'>
           <span className='label'>Message</span>
+
           <Input
             className='code'
             defaultValue={signMessage}
@@ -574,8 +614,10 @@ function EvmWalletInfo (): React.ReactElement {
             type='text'
           />
         </div>
+
         <div className='evm-wallet-transaction_row'>
           <span className='label'>Sign Method</span>
+
           <Select
             defaultValue={signMethod}
             onChange={_onChangeSignMethod}
@@ -586,14 +628,17 @@ function EvmWalletInfo (): React.ReactElement {
             >{v.name}</Option>))}
           </Select>
         </div>
+
         <div className='evm-wallet-transaction_row'>
           <Button
             className='sub-wallet-btn sub-wallet-btn-small-size max-w'
             onClick={signData}
           >Sign Data</Button>
         </div>
+
         <div className='evm-wallet-transaction_row'>
           <span className='label'>Result</span>
+
           <Input
             className='code'
             readOnly={true}
@@ -601,6 +646,7 @@ function EvmWalletInfo (): React.ReactElement {
             value={signature}
           />
         </div>
+
         {signMethod !== 'ethSign' && <div>
           <div className='evm-wallet-transaction_row'>
             <Button
@@ -609,8 +655,10 @@ function EvmWalletInfo (): React.ReactElement {
               onClick={verifySignature}
             >Verify Signature</Button>
           </div>
+
           <div className='evm-wallet-transaction_row'>
             <span className='label'>Validate Result</span>
+
             <Input
               className='code'
               readOnly={true}
@@ -620,8 +668,10 @@ function EvmWalletInfo (): React.ReactElement {
           </div>
         </div>}
       </div>
+
       <div className='evm-wallet-info-page__section'>
         <div className='evm-wallet-info-page__text'>Connect provider with web3.js</div>
+
         <div>Latest block: <span className='account-item__content'>{lastestBlock}</span></div>
       </div>
     </div>

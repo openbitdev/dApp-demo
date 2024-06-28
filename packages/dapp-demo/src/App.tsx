@@ -30,14 +30,17 @@ export function App () {
                 element={<Welcome />}
                 index
               />
+
               <Route
                 element={<Welcome />}
                 path='/welcome'
               />
+
               <Route
                 element={<WalletInfo />}
                 path='/wallet-info'
               />
+
               <Route
                 element={<EvmWalletInfo />}
                 path='/evm-wallet-info'

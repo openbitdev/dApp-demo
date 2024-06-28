@@ -52,13 +52,17 @@ function AccountList (): React.ReactElement {
         <div className='info'>
           <div className='account-item-info'>
             <span className='account-item__title'>Name:</span>
+
             <span className='account-item__content'>{acc.name}</span>
           </div>
+
           <div className='account-item-info'>
             <span className='account-item__title'>Address:</span>
+
             <span className='account-item__content'>{acc.address}</span>
           </div>
         </div>
+
         <div className={'actions'}>
           <Button
             className='sub-wallet-btn sub-wallet-sign-btn'

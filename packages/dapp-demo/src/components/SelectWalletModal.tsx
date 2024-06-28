@@ -24,16 +24,20 @@ function SelectWalletModal ({ theme }: Props): React.ReactElement<Props> {
   const onSelectWallet = useCallback(
     (walletKey, walletType: 'bitcoin' | 'evm' = 'bitcoin') => {
       if (walletType === 'bitcoin') {
-        walletContext.setWallet(connectors.find(({ name }) => name === walletKey), walletType);
-        openSelectWalletContext.close();
-        navigate('/wallet-info');
+        const connector = connectors.find(({ name }) => name === walletKey);
+
+        if (connector) {
+          walletContext.setWallet(connector, walletType);
+          openSelectWalletContext.close();
+          navigate('/wallet-info');
+        }
       } else {
         walletContext.setWallet(getEvmWalletBySource(walletKey), walletType);
         openSelectWalletContext.close();
         navigate('/evm-wallet-info');
       }
     },
-    [navigate, openSelectWalletContext, walletContext]
+    [connectors, navigate, openSelectWalletContext, walletContext]
   );
 
   return <Modal

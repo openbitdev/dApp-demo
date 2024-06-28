@@ -9,16 +9,38 @@ import { OpenSelectWallet, WalletContext } from '../contexts';
 require('./WalletHeader.scss');
 
 interface Props {
-  visible?: boolean
+  visible?: boolean;
+  walletType: 'bitcoin'|'evm';
 }
 
-function WalletHeader ({ visible }: Props): React.ReactElement<Props> {
+function WalletHeader ({ visible, walletType }: Props): React.ReactElement<Props> {
   const walletContext = useContext(WalletContext);
   const selectWallet = useContext(OpenSelectWallet);
-  const wallet = walletContext.evmWallet;
+  const bitcoinWallet = walletContext.wallet;
+  const evmWallet = walletContext.evmWallet;
 
   if (!visible) {
     return (<></>);
+  }
+
+  if (walletType === 'bitcoin') {
+    return (<header className={'wallet-header-wrapper'}>
+      <div className={'boxed-container'}>
+        <div className={'wallet-header-content'}>
+          <div className={'wallet-title'}>
+            {bitcoinWallet?.name}
+          </div>
+
+          <div className='spacer' />
+
+          <Button
+            className='sub-wallet-btn sub-wallet-btn-small-size'
+            onClick={selectWallet.open}
+            type={'primary'}
+          >Select Wallet</Button>
+        </div>
+      </div>
+    </header>);
   }
 
   return (<header className={'wallet-header-wrapper'}>
@@ -26,15 +48,18 @@ function WalletHeader ({ visible }: Props): React.ReactElement<Props> {
       <div className={'wallet-header-content'}>
         <div>
           <img
-            alt={wallet?.logo?.alt}
+            alt={evmWallet?.logo?.alt}
             className={'wallet-logo'}
-            src={wallet?.logo?.src}
+            src={evmWallet?.logo?.src}
           />
         </div>
+
         <div className={'wallet-title'}>
-          {wallet?.title}
+          {evmWallet?.title}
         </div>
+
         <div className='spacer' />
+
         <Button
           className='sub-wallet-btn sub-wallet-btn-small-size'
           onClick={selectWallet.open}

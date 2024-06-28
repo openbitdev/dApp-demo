@@ -1,10 +1,11 @@
 // Copyright 2019-2022 @subwallet/sub-connect authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
+import { LoadingOutlined } from '@ant-design/icons';
 import { SatsConnector, useConnect } from '@gobob/sats-wagmi';
 import { getEvmWallets } from '@openbit/wallet-connect/evm/evmWallets';
 import { EvmWallet } from '@openbit/wallet-connect/types';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 require('./SelectWallet.scss');
 
@@ -15,6 +16,21 @@ interface Props {
 function SelectWallet ({ onSelectWallet }: Props): React.ReactElement<Props> {
   const evmWallets = getEvmWallets();
   const { connectors } = useConnect();
+  const [isPreparingConnectors, setIsPreparingConnectors] = useState(true);
+
+  useEffect(() => {
+    let isSync = true;
+
+    Promise.all(connectors.map((c) => c.isReady())).catch(console.log).finally(() => {
+      if (isSync) {
+        setIsPreparingConnectors(false);
+      }
+    });
+
+    return () => {
+      isSync = false;
+    };
+  }, [connectors]);
 
   const onClickBitcoinWallet = useCallback(
     (wallet: SatsConnector) => {
@@ -49,9 +65,11 @@ function SelectWallet ({ onSelectWallet }: Props): React.ReactElement<Props> {
           src={wallet.logo?.src}
         />
       </div>
+
       <div className={'wallet-title'}>
         {wallet.title}
       </div>
+
       <div className={'wallet-install'}>
         {wallet.installed
           ? ''
@@ -72,23 +90,31 @@ function SelectWallet ({ onSelectWallet }: Props): React.ReactElement<Props> {
       key={wallet.name}
       onClick={onSelect(wallet)}
     >
-      <div>
-
-      </div>
       <div className={'wallet-title'}>
         {wallet.name}
       </div>
-      {/* <div className={'wallet-install'}> */}
-      {/*  {wallet.isReady() */}
-      {/*    ? '' */}
-      {/*    : (<a */}
-      {/*      href={wallet.installUrl} */}
-      {/*      rel='noreferrer' */}
-      {/*      target='_blank' */}
-      {/*    > */}
-      {/*      Install */}
-      {/*    </a>)} */}
-      {/* </div> */}
+
+      {!isPreparingConnectors && !wallet.ready
+        ? (
+          <div className={'wallet-install'}>
+            {wallet.ready
+              ? ''
+              : (
+                <a
+                  href={wallet.homepage}
+                  rel='noreferrer'
+                  target='_blank'
+                >
+                Install
+                </a>
+              )}
+          </div>
+        )
+        : null}
+
+      {isPreparingConnectors && (
+        <LoadingOutlined />
+      )}
     </div>
   );
 
@@ -98,12 +124,15 @@ function SelectWallet ({ onSelectWallet }: Props): React.ReactElement<Props> {
         <div className='wallet-cat-title'>
           Bitcoin Wallets
         </div>
+
         {connectors.map((wallet) => (walletItemBTC(wallet, onClickBitcoinWallet)))}
       </div>
-      <div className='evm-wallet-list'>
+
+      <div className='evm-wallet-list hidden'>
         <div className='wallet-cat-title'>
           EVM Wallets
         </div>
+
         {evmWallets.map((wallet) => (walletItem(wallet, onClickEvmWallet)))}
       </div>
     </div>

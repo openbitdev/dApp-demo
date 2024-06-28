@@ -15,17 +15,17 @@ function Welcome (): React.ReactElement {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // if (walletContext.wallet && walletContext.walletType === 'substrate') {
-    //   navigate('/wallet-info');
-    // } else
-    if (walletContext.evmWallet && walletContext.walletType === 'evm') {
+    if (walletContext.wallet && walletContext.walletType === 'bitcoin') {
+      navigate('/wallet-info');
+    } else if (walletContext.evmWallet && walletContext.walletType === 'evm') {
       navigate('/evm-wallet-info');
     }
   }, [navigate, walletContext]);
 
   return (<div className={'welcome-wrapper'}>
     <div className={'welcome-content'}>
-      <div className='welcome-content__text'>Welcome to SubWallet Connect</div>
+      <div className='welcome-content__text'>Welcome to OpenBit Connect</div>
+
       <Button
         className='sub-wallet-btn sub-wallet-btn-normal-size'
         onClick={selectWallet.open}

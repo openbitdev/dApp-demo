@@ -31,16 +31,5 @@ export const PREDEFINED_EVM_WALLETS: EvmWalletInfo[] = [
     },
     isSetGlobalString: 'isMetaMask',
     initEvent: 'ethereum#initialized'
-  },
-  {
-    extensionName: 'ethereum',
-    title: 'Nova Wallet (EVM)',
-    installUrl: 'https://novawallet.io',
-    logo: {
-      src: NovaWalletLogo as string,
-      alt: 'NovaWallet (EVM)'
-    },
-    isSetGlobalString: 'isNovaWallet',
-    initEvent: 'ethereum#initialized'
   }
 ];
