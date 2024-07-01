@@ -20,11 +20,21 @@ export function WalletContextProvider ({ children }: Props) {
   const [currentWallet, setCurrentWallet] = useState<EvmWallet | undefined | SatsConnector>(getEvmWalletBySource(walletKey));
   const [isSelectWallet, setIsSelectWallet] = useState(false);
   const [accounts, setAccounts] = useState<WalletAccount[]>([]);
-  const { connectors } = useConnect();
+  const { connect, connectors } = useConnect();
 
   // getAccount
   const afterSelectWallet = useCallback(
-    (wallet: SatsConnector) => {
+    async (wallet: SatsConnector) => {
+      try {
+        if (!(await wallet.isReady())) {
+          connect({
+            connector: wallet
+          });
+        }
+      } catch (e) {
+        return;
+      }
+
       const address = wallet.getAccount();
 
       if (address) {
@@ -34,7 +44,7 @@ export function WalletContextProvider ({ children }: Props) {
         }]);
       }
     },
-    []
+    [connect]
   );
 
   const getConnectBitcoin = (connector: string) => {
@@ -43,23 +53,27 @@ export function WalletContextProvider ({ children }: Props) {
 
   const selectWallet = useCallback(
     async (wallet: SatsConnector) => {
-      if (!wallet.isAuthorized()) {
-        try {
-          await wallet.connect();
-        } catch (e) {
-          console.log('Error when connect()', e);
+      // if (!wallet.isAuthorized()) {
+      //   try {
+      //     await wallet.connect();
+      //   } catch (e) {
+      //     console.log('Error when connect()', e);
+      //
+      //     return;
+      //   }
+      // }
 
-          return;
-        }
-      }
+      connect({
+        connector: wallet
+      });
 
       setCurrentWallet(currentWallet);
 
       setWalletKey(wallet.name);
 
-      afterSelectWallet(wallet);
+      await afterSelectWallet(wallet);
     },
-    [afterSelectWallet, currentWallet, setWalletKey]
+    [afterSelectWallet, connect, currentWallet, setWalletKey]
   );
 
   const afterSelectEvmWallet = useCallback(
@@ -116,7 +130,7 @@ export function WalletContextProvider ({ children }: Props) {
 
         setTimeout(() => {
           wallet && wallet?.isReady().then(() => {
-            afterSelectWallet(wallet);
+            afterSelectWallet(wallet).catch(console.error);
           }).catch(console.log);
         }, 150);
       } else {

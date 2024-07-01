@@ -28,7 +28,17 @@ function WalletHeader ({ visible, walletType }: Props): React.ReactElement<Props
       <div className={'boxed-container'}>
         <div className={'wallet-header-content'}>
           <div className={'wallet-title'}>
-            {bitcoinWallet?.name}
+            <span>
+              {bitcoinWallet?.name}
+            </span>
+
+            {
+              bitcoinWallet?.network && (
+                <span>
+                  &nbsp;({bitcoinWallet?.network === 'mainnet' ? 'Mainet' : 'Testnet'})
+                </span>
+              )
+            }
           </div>
 
           <div className='spacer' />
