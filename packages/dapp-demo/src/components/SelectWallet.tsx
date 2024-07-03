@@ -5,7 +5,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { SatsConnector, useConnect } from '@gobob/sats-wagmi';
 import { getEvmWallets } from '@openbit/wallet-connect/evm/evmWallets';
 import { EvmWallet } from '@openbit/wallet-connect/types';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 require('./SelectWallet.scss');
 
@@ -17,6 +17,16 @@ function SelectWallet ({ onSelectWallet }: Props): React.ReactElement<Props> {
   const evmWallets = getEvmWallets();
   const { connectors } = useConnect();
   const [isPreparingConnectors, setIsPreparingConnectors] = useState(true);
+
+  const sortedConnectors = useMemo(() => {
+    const openBitConnector = connectors.find((c) => c.id === 'openBit');
+
+    if (openBitConnector) {
+      return [openBitConnector, ...connectors.filter((c) => c.id !== 'openBit')];
+    }
+
+    return connectors;
+  }, [connectors]);
 
   useEffect(() => {
     let isSync = true;
@@ -127,7 +137,7 @@ function SelectWallet ({ onSelectWallet }: Props): React.ReactElement<Props> {
           Bitcoin Wallets
         </div>
 
-        {connectors.map((wallet) => (walletItemBTC(wallet, onClickBitcoinWallet)))}
+        {sortedConnectors.map((wallet) => (walletItemBTC(wallet, onClickBitcoinWallet)))}
       </div>
 
       <div className='evm-wallet-list hidden'>
