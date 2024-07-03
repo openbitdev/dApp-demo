@@ -2297,6 +2297,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@gobob/bob-sdk@npm:1.1.1":
+  version: 1.1.1
+  resolution: "@gobob/bob-sdk@npm:1.1.1"
+  dependencies:
+    bitcoinjs-lib: ^6.1.5
+  checksum: 2a917cd331d724a2fe64f3f92877eb6d88d043db5622882dfce82d03e16ee2996e97cb7f15c5359d3f8b0cef1539c14e07c5d21a12a6fecf66c1c0e64336e30f
+  languageName: node
+  linkType: hard
+
 "@gobob/bob-sdk@npm:^1.1.1":
   version: 1.2.0
   resolution: "@gobob/bob-sdk@npm:1.2.0"
@@ -2318,12 +2327,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gobob/sats-wagmi@npm:^0.0.3":
+"@gobob/sats-wagmi@file:./local-libs/sats-wagmi::locator=root-workspace-0b6124%40workspace%3A.":
   version: 0.0.3
-  resolution: "@gobob/sats-wagmi@npm:0.0.3"
+  resolution: "@gobob/sats-wagmi@file:./local-libs/sats-wagmi#./local-libs/sats-wagmi::hash=3a212f&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@bitcoin-js/tiny-secp256k1-asmjs": ^2.2.3
-    "@gobob/bob-sdk": ^1.1.1
+    "@gobob/bob-sdk": 1.1.1
     "@gobob/react-query": ^0.0.2
     "@gobob/types": ^0.0.2
     "@gobob/utils": ^0.0.2
@@ -2338,7 +2347,7 @@ __metadata:
   peerDependencies:
     react: ">=18"
     react-dom: ">=18"
-  checksum: f5bc3a44c3143e19fd9c96e6a4bca6e846cef393e1d05900f5ae57a29c06e85e07de048d10889fdac76adb45ffbd64f2c267f99ecf8f096d5dcdaafc07919485
+  checksum: fe407cb13b98bc76cb6a8201fea62141177419b98e00ab11c46b902095204b278c2344e54512c554ac9731d432030f171579a9613e1474dfa61d0ddaa965d2bc
   languageName: node
   linkType: hard
 

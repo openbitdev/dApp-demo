@@ -1,0 +1,67 @@
+{
+  "name": "@gobob/sats-wagmi",
+  "version": "0.0.3",
+  "description": "Bob sats-wagmi.",
+  "homepage": "https://github.com/bob-collective/sats-wagmi#readme",
+  "license": "MIT",
+  "keywords": [
+    "bob",
+    "btc wallet",
+    "btc wallet connector",
+    "btc wallet connector hooks",
+    "btc wallet connector config"
+  ],
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bob-collective/sats-wagmi.git",
+    "directory": "packages/sats-wagmi"
+  },
+  "bugs": {
+    "url": "https://github.com/bob-collective/sats-wagmi/issues"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "dependencies": {
+    "@bitcoin-js/tiny-secp256k1-asmjs": "^2.2.3",
+    "@gobob/bob-sdk": "1.1.1",
+    "@metamask/providers": "^12.0.0",
+    "async-retry": "^1.3.3",
+    "bip32": "^4.0.0",
+    "bitcoinjs-lib": "^6.1.5",
+    "bs58check": "^2.1.2",
+    "coinselect": "^3.1.13",
+    "sats-connect": "^1.1.2",
+    "wagmi": "^1.4.1",
+    "@gobob/types": "^0.0.2",
+    "@gobob/react-query": "^0.0.2",
+    "@gobob/utils": "^0.0.2"
+  },
+  "clean-package": "../../clean-package.config.json",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --ext ts,tsx --fix",
+    "clean": "rimraf dist .turbo",
+    "typecheck": "tsc --noEmit",
+    "build": "tsup src/index.ts --dts"
+  }
+}
