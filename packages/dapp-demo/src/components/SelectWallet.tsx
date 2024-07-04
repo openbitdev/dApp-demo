@@ -19,10 +19,10 @@ function SelectWallet ({ onSelectWallet }: Props): React.ReactElement<Props> {
   const [isPreparingConnectors, setIsPreparingConnectors] = useState(true);
 
   const sortedConnectors = useMemo(() => {
-    const openBitConnector = connectors.find((c) => c.id === 'openBit');
+    const openBitConnector = connectors.find((c) => c.id === 'openbit');
 
     if (openBitConnector) {
-      return [openBitConnector, ...connectors.filter((c) => c.id !== 'openBit')];
+      return [openBitConnector, ...connectors.filter((c) => c.id !== 'openbit')];
     }
 
     return connectors;

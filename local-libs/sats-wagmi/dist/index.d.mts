@@ -452,8 +452,6 @@ declare class OpenBitConnector extends SatsConnector {
     id: string;
     name: string;
     homepage: string;
-    derivationPath: string | undefined;
-    paymentAddress: string | undefined;
     constructor(network: WalletNetwork);
     connect(): Promise<void>;
     isReady(): Promise<boolean>;

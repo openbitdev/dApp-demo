@@ -831,11 +831,9 @@ import { isValidBTCAddress as isValidBTCAddress3 } from "@gobob/utils";
 var OpenBitConnector = class extends SatsConnector {
   constructor(network) {
     super(network);
-    __publicField(this, "id", "openBit");
+    __publicField(this, "id", "openbit");
     __publicField(this, "name", "OpenBit");
     __publicField(this, "homepage", "https://docs.openbit.app/");
-    __publicField(this, "derivationPath");
-    __publicField(this, "paymentAddress");
   }
   async connect() {
     return new Promise(async (resolve, reject) => {
@@ -844,10 +842,7 @@ var OpenBitConnector = class extends SatsConnector {
         const account = addressesResult.result.addresses.find(
           (el) => el.type === "p2tr" && !!el.isTestnet === (this.network === "testnet")
         );
-        const paymentAccount = addressesResult.result.addresses.find(
-          (el) => el.type === "p2wpkh" && !!el.isTestnet === (this.network === "testnet")
-        );
-        if (!account || !paymentAccount) {
+        if (!account) {
           reject(new Error("Failed to connect wallet"));
           return;
         }
@@ -856,9 +851,7 @@ var OpenBitConnector = class extends SatsConnector {
           return;
         }
         this.address = account.address;
-        this.paymentAddress = paymentAccount.address;
         this.publicKey = account.publicKey;
-        this.derivationPath = account.derivationPath;
         resolve();
       } catch (e) {
         reject(e);

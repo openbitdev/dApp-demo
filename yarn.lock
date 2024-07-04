@@ -2329,7 +2329,7 @@ __metadata:
 
 "@gobob/sats-wagmi@file:./local-libs/sats-wagmi::locator=root-workspace-0b6124%40workspace%3A.":
   version: 0.0.3
-  resolution: "@gobob/sats-wagmi@file:./local-libs/sats-wagmi#./local-libs/sats-wagmi::hash=3a212f&locator=root-workspace-0b6124%40workspace%3A."
+  resolution: "@gobob/sats-wagmi@file:./local-libs/sats-wagmi#./local-libs/sats-wagmi::hash=dfc340&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@bitcoin-js/tiny-secp256k1-asmjs": ^2.2.3
     "@gobob/bob-sdk": 1.1.1
@@ -2347,7 +2347,7 @@ __metadata:
   peerDependencies:
     react: ">=18"
     react-dom: ">=18"
-  checksum: fe407cb13b98bc76cb6a8201fea62141177419b98e00ab11c46b902095204b278c2344e54512c554ac9731d432030f171579a9613e1474dfa61d0ddaa965d2bc
+  checksum: 7290df6d4947ab9b2d6adbe783c992d57a3c32c780fb1b02f7b1d873a3986fee17b59a696630a378f2a8115204be31301ee562b62d782f7ead68ef56e67ba7ee
   languageName: node
   linkType: hard
 
