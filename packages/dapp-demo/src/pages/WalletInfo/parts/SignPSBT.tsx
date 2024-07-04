@@ -76,8 +76,6 @@ export function SignPSBT ({ wallet }: Props): React.ReactElement {
             onChange={_onChangeFieldInputIndex}
             type='number'
           />
-
-          <span className='suffix'>BTC</span>
         </div>
       </div>
 
